@@ -4,6 +4,7 @@ const initialState = {
 
     isOpen: false,
     actividad:{},
+    cliente:{},
     actualizado: false
 }
 
@@ -24,6 +25,12 @@ export const modalActPreReducer = (state = initialState, action) => {
             ...state,
             actividad: action.payload
         }
+        
+        case types.modalCliente: return {
+            ...state,
+            cliente: action.payload
+        }
+
         case types.modalActualizado:
             return {
                 ...state,
@@ -37,7 +44,6 @@ export const modalActPreReducer = (state = initialState, action) => {
     
         default:
             return state
-            break;
     }
 
 

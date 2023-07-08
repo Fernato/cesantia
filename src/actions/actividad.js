@@ -1,12 +1,13 @@
 
 import Swal from "sweetalert2";
-import { fetchConToken, fetchSinToken } from "../helpers/fetch";
+import { fetchConToken } from "../helpers/fetch";
 import { types } from "../types/types"
+import { Cargado, Cargando } from "./carga";
 
 export const getId = () => {
   return async(dispatch) => {
     try {
-      const respuesta = await fetchSinToken('actividad/count')
+      const respuesta = await fetchConToken('actividad/count')
       const body = await respuesta.json();
       dispatch(addCount(body.id_actividad))
       
@@ -79,8 +80,8 @@ export const AddNewActividad = (actividad) =>{
 
       try {
         
-        await fetchSinToken('actividad', actividad, 'POST');   
-  
+        const result = await fetchConToken('actividad', actividad, 'POST');   
+        const body = await result.json()
         
         const Toast = Swal.mixin({
             toast: true,
@@ -99,7 +100,7 @@ export const AddNewActividad = (actividad) =>{
             title: 'Guardado Correctamente'
           })
   
-        dispatch(addActvidad(actividad));
+        dispatch(addActvidad(body.actividad));
      
       } catch (error) {
         console.log(error)
@@ -116,9 +117,11 @@ const addActvidad = (actividad) => ({
 
 export const getActividad = () => {
     return async (dispatch) => {
+      dispatch(Cargando())
         try {
             const respuesta = await fetchConToken('actividad');
             const body = await respuesta.json();
+            dispatch(Cargado())
             dispatch(loadActividades(body.actividades));
 
         } catch (error) {
@@ -172,6 +175,38 @@ const agregarActividadVista = (actividades) =>({
   payload: actividades
 })
 
+
+export const actualizarActividad = (actividad ) => {
   
+  return async (dispatch) => {
+    try {
+
+      const respuesta = await fetchConToken(`actividad/${actividad._id}`,actividad, 'PUT')
+      const body = await respuesta.json();
+      
+      
+      if(body.ok){
+        await dispatch(getActividad());
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Ha sido actualizado',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+       
+    } catch (error) {
+
+      Swal.fire({
+                title: 'Error!',
+                text: `${error}`,
+                icon: 'error',
+                confirmButtonText: 'Cool'
+              })
+    }
+  }
+}
 
 

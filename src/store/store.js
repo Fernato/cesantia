@@ -1,10 +1,12 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from 'redux-thunk'
 import { actividadReducer } from "../reducers/actividadReducer";
+import { cargaReducer } from "../reducers/cargaReducer";
 import { clienteReducer } from "../reducers/clienteReducer";
 import { modalActPreReducer } from "../reducers/modalActPreReducer";
 import {presupuestoReducer} from '../reducers/presupuestoReducer';
 import {reporteReducer} from '../reducers/reporteReducer';
+import { usuarioReducer } from "../reducers/usuarioReducer";
 import { vistaReducer } from "../reducers/vistaReducer";
 
 
@@ -17,7 +19,9 @@ const reducers = combineReducers({
     presupuesto: presupuestoReducer,
     reporte: reporteReducer,
     vista: vistaReducer,
-    modal: modalActPreReducer
+    modal: modalActPreReducer,
+    carga: cargaReducer,
+    usuario: usuarioReducer
 
 })
 

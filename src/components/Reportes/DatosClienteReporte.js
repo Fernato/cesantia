@@ -53,14 +53,14 @@ export const DatosCliente = () => {
                 />
                
 
-                <div className='row mt-2'>
+                <div className='form-group d-grid gap-2 mt-2'>
                     <button type='submit' className='btn btn-primary'>
                         Buscar
                     </button>
                 </div>
             </form>
 
-            <h2>Nombre {nombre}  </h2>
+            <h2 className='mt-3'>Nombre {nombre}  </h2>
          
 
         </>

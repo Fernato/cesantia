@@ -1,19 +1,20 @@
 import Swal from "sweetalert2";
-import { fetchConToken, fetchSinToken } from "../helpers/fetch";
+import { fetchConToken} from "../helpers/fetch";
 import { types } from "../types/types";
+import { Cargado, Cargando } from "./carga";
 
 
+const endPoint = 'cLiente'
 
 export const addNewCliente = (cliente) => {
 
     return async (dispatch) => {
-        if(cliente.cedula !== '')
-        {
+      dispatch(Cargando())
           try {
             
-            const respuesta = await fetchSinToken('cliente', cliente, 'POST');   
+            const respuesta = await fetchConToken(`${endPoint}`, cliente, 'POST');   
             const body = await respuesta.json()
-
+            dispatch(Cargado())
             if(body.ok){
               //dispatch(addCliente(cliente));
 
@@ -41,7 +42,7 @@ export const addNewCliente = (cliente) => {
 
               Swal.fire({
                 title: 'Error!',
-                text: `${body.msg}`,
+                text: `${body.errors.cedula.msg}`,
                 icon: 'error',
                 confirmButtonText: 'Cool'
               })    
@@ -50,17 +51,7 @@ export const addNewCliente = (cliente) => {
           } catch (error) {
             console.log(error)
           }
- 
 
-        }else {
-            Swal.fire({
-                title: 'Error!',
-                text: 'Debe ingresar la cedula',
-                icon: 'error',
-                confirmButtonText: 'Cool'
-              })
-        }
-        
     }
 }
 
@@ -94,7 +85,7 @@ export const startDeleteCliente = (id) =>{
             if (result.isConfirmed) {
                 try {
  
-                  fetchSinToken( `cliente/${id}`,{},'DELETE');
+                  fetchConToken( `${endPoint}/${id}`,{},'DELETE');
 
                     swalWithBootstrapButtons.fire(
                       'Eliminado!',
@@ -130,9 +121,11 @@ const loadCliente = (clientes) => ({
 
 export const getClientes = () => {
     return async (dispatch) => {
+         dispatch(Cargando())
         try {
-            const respuesta = await fetchSinToken('cliente');
+            const respuesta = await fetchConToken(`${endPoint}`);
             const body = await respuesta.json();
+          dispatch(Cargado())
             dispatch(loadCliente(body.clientes));
 
         } catch (error) {
@@ -149,9 +142,12 @@ export const getClientes = () => {
 
 export const getCliente = (cedula) => {
     return async (dispatch) => {
+        dispatch(Cargando())
+
         try {
-            const respuesta = await fetchConToken(`cliente/${cedula}`);
+            const respuesta = await fetchConToken(`${endPoint}/${cedula}`);
             const body = await respuesta.json();
+            dispatch(Cargado())
             dispatch(loadUnCliente(body.cliente));
 
         } catch (error) {
@@ -166,8 +162,47 @@ export const getCliente = (cedula) => {
     }
 }
 
-const loadUnCliente = (clientes) => ({
+export const loadUnCliente = (cliente) => ({
     type: types.getUnCliente,
-    payload: clientes
+    payload: cliente
 })
 
+
+export const updateCliente = (cliente) => ({
+  type: types.updateCliente,
+  payload: cliente
+})
+
+export const actualizarCliente = (cliente ) => {
+  
+  return async (dispatch) => {
+    dispatch(Cargando())
+    try {
+
+      const respuesta = await fetchConToken(`${endPoint}/${cliente._id}`,cliente, 'PUT')
+      const body = await respuesta.json();
+      dispatch(Cargado())
+      
+      if(body.ok){
+        await dispatch(getClientes());
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Ha sido actualizado',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+
+       
+    } catch (error) {
+
+      Swal.fire({
+                title: 'Error!',
+                text: `${error}`,
+                icon: 'error',
+                confirmButtonText: 'Cool'
+              })
+    }
+  }
+}

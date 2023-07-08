@@ -104,6 +104,7 @@ export const EditActividad = () => {
         <form onSubmit={handleSumit} className='formularioCliente'>
             <div className='row'>
                 <div className='row mt-2'>
+                    <label>Id</label>
                     <input
                     type='text'
                     name='id_actividad'
@@ -116,6 +117,7 @@ export const EditActividad = () => {
                     />
                 </div>
                 <div className='row mt-2'>
+                    <label>Descripcion</label>
                     <input
                     type='text'
                     name='descripcion'
@@ -128,6 +130,7 @@ export const EditActividad = () => {
                     />
                 </div>
                 <div className='row mt-2'>
+                    <label>Unidad</label>
                     <input
                           type='text'
                     name='unidad'
@@ -140,6 +143,7 @@ export const EditActividad = () => {
                     />
                 </div>
                 <div className='row mt-2'>
+                    <label>Cantidad</label>
                     <input
                     type='text'
                     name='cantidad'
@@ -153,6 +157,7 @@ export const EditActividad = () => {
                     />
                 </div>
                 <div className='row mt-2'>
+                    <label>Precio Unitario</label>
                     <input
                     type='text'
                     name='precio_unitario'
@@ -166,6 +171,7 @@ export const EditActividad = () => {
                     />
                 </div>
                 <div className='row mt-2'>
+                    <label>Total</label>
                     <input
                     type='text'
                     name='total'
@@ -183,7 +189,7 @@ export const EditActividad = () => {
                         Actualizar
                     </button>
                 </div>
-                
+  
             </div>
         </form>
         <div className='row mt-2'>

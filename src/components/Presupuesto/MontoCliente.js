@@ -14,26 +14,6 @@ export const MontoCliente = () => {
 
     
     
-    
-    //const {_id} = cliente
-/*
-    const [presupuesto, setPresupuesto] = useState({
-        fecha: moment().format("MMM Do YY"),
-        total: suma,
-        listActividades: actividades,
-        _id: _id
-    })
-   
-
-
-    const [presupuesto, setPresupuesto] = useState({
-        fecha: moment().format("MMM Do YY"),
-        total: 0,
-        listActividades:[],
-        _id: 0
-    })
-
-*/
     const [pre, setPre] = useState({
         monto:'',
         fecha: moment().format("YY MMM Do")
@@ -81,7 +61,7 @@ export const MontoCliente = () => {
    
     
     
-                    <div className='row mt-2'>
+                    <div className='form-group d-grid gap-2 mt-2'>
                         <button type='submit' className='btn btn-primary'>
                             Calcular
                         </button>
@@ -91,13 +71,15 @@ export const MontoCliente = () => {
             </form>
     
             <p>{suma}</p>
+            <div className='form-group d-grid gap-2 mt-2'>
+                <button 
+                    className='btn btn-primary'
+                    onClick={handleGuardar}
+                >
+                    Guardar
+                </button>
 
-            <button 
-                className='btn btn-primary'
-                onClick={handleGuardar}
-            >
-                Guardar
-            </button>
+            </div>
             <p>{suma}</p>
         </div>
 

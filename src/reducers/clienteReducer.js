@@ -11,7 +11,7 @@ import { types } from "../types/types";
 */
 
 const initialState = {
-    cliente: []
+    clientes: []
 }
 
 export const clienteReducer = ( state = initialState, action ) => {
@@ -20,20 +20,28 @@ export const clienteReducer = ( state = initialState, action ) => {
         case types.getCliente:
             return {
                 ...state,
-                cliente: [ ...action.payload ]
+                clientes: [ ...action.payload ]
                 
             }
-        
-        //case types.getUnCliente:
-            //return{
-               // cliente: action.payload
-            //}
+ /*       
+        case types.getUnCliente:
+        return{
+                unCliente: action.payload
+            }
 
-        
+   */      
+        case types.updateCliente:
+            return {
+                ...state,
+                clientes: state.clientes.map(
+                    c=> ( c._id === action.payload._id) ? action.payload : c
+                )
+            }
+
         case types.addCliente:
             return {
                 ...state,
-                cliente: [
+                clientes: [
                     ...state.cliente,
                     action.payload
                 ]

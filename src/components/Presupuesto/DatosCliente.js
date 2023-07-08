@@ -53,7 +53,7 @@ export const DatosCliente = () => {
                 />
                
 
-                <div className='row mt-2'>
+                <div className='form-group d-grid gap-2 mt-2'>
                     <button type='submit' className='btn btn-primary'>
                         Buscar
                     </button>

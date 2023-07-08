@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import {cargarUnPresupuesto, deletePresupuesto, getPresupuesto, getPresupuestos} from '../../actions/presupuesto'
 import { pruebaPresupuestos } from '../../helpers/prepareActividades';
 import { PdfScreen } from '../Pdf/PdfScreen'
@@ -13,9 +13,14 @@ export const TablaReporte = () => {
     const {presupuestos} = useSelector(state => state.reporte)
     const pres = pruebaPresupuestos(presupuestos)
 
+    
+
     const getPresupuest = ( pre) => {
         //dispatch(cargarUnPresupuesto(presupuesto));
         dispatch(getPresupuesto(pre._id, pre.fecha, pre.total, pre.listActividades, pre.cliente))
+        
+       
+
     }
 
     const handleSuprimir = (id) => {
@@ -41,6 +46,7 @@ export const TablaReporte = () => {
         <table className='table table-striped table-hover'>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Cliente</th>
                     <th>Fecha</th>
                     <th>Ver</th>
@@ -50,9 +56,10 @@ export const TablaReporte = () => {
             </thead>
             <tbody>
 
-                {pres.map(pre => {
+                {pres.map((pre, index) => {
                     return(
                         <tr key={pre._id}>
+                            <td>{index + 1}</td>
                             <td>{pre.cliente.nombre}</td>
                             <td>{pre.fecha}</td>
                             <td>

@@ -58,8 +58,6 @@ export const FormActividades = () => {
       
             
             <form onSubmit={handleSumit} className='formularioCliente'>
-                <div className='row'>
-
                     <div className='mt-2'>
                         <input
                             id='nuevo'
@@ -133,8 +131,7 @@ export const FormActividades = () => {
                         onChange={handleInputChange}
                         />
                     </div>
-                </div>
-                <div className='row mt-2'>
+                <div className='form-group d-grid gap-2 mt-2'>
 
                     <button type='submit' className='btn btn-primary'>
                         Guardar

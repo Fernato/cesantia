@@ -22,11 +22,19 @@ const initialState = {
     total: 0,
     listActividades: [],
     cliente:{}, 
+    presupuestos:[]
 }
 
 export const presupuestoReducer = (state = initialState, action) => {
 
     switch (action.type) {
+
+        case types.presupuestoInitial:
+            return {
+                ...state,
+                state : initialState
+            }
+
         case types.presupuestoPrueba:
             return {
                 ...state,
@@ -56,7 +64,19 @@ export const presupuestoReducer = (state = initialState, action) => {
                 listActividades: [ ...action.payload.listActividades ],
                 cliente: action.payload.cliente
             }  
-     
+        case types.presupuestoEliminarActividad:
+            return{
+                ...state,
+                listActividades: action.payload.listActividades,
+                total: action.payload.suma
+            }
+        
+        case types.presupuestoGetPresupuestosId:
+            return{
+                ...state,
+                cliente: action.payload.cliente,
+                presupuestos: [...action.payload.presupuestos]
+            }
     
         default:
             return state

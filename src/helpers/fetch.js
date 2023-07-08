@@ -1,5 +1,11 @@
+//Sprint Boot
 //const baseUrl = 'http://localhost:8080'
-const baseUrl = 'http://localhost:4000/api'
+//Node.js
+const baseUrl = 'http://localhost:5000/api'
+//const baseUrl = process.env.REACT_APP_API_URL;
+//Produccion
+//const baseUrl = 'https://cesantias.herokuapp.com/api'
+
 
 
 const fetchSinToken = (endpoint, data, method = 'GET') => {
@@ -14,6 +20,7 @@ const fetchSinToken = (endpoint, data, method = 'GET') => {
         headers: {
           'Content-type': 'application/json'
         },
+        mode: 'cors',
         body: JSON.stringify( data )
       })
     }
@@ -28,7 +35,7 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
       return fetch( url, {
           method,
           headers: {
-              'x-token': token
+            'x-token': token,
           }
       });
   } else {

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actuaPresupuesto, pruebaPresupuesto } from '../../actions/presupuesto';
 
 
+
 import { PdfScreen } from '../Pdf/PdfScreen';
 import { TablaPresupuesto } from '../Presupuesto/TablaPresupuesto';
 
@@ -13,42 +14,9 @@ export const VisualizarScreen = () => {
     const {presupuesto} = useSelector(state => state)
     const {cliente, listActividades, total} = useSelector(state => state.presupuesto)
     const {actualizado } = useSelector(state => state.modal)
-   
-   
-
-  //if(!actualizado){
-
-    //dispatch(pruebaPresupuesto(listActividades, total));
-  //}
-/*
-    const actualizar = () => {
-      console.log(presupuesto)
-      dispatch(actuaPresupuesto(presupuesto))
-    }
-
-    */
-/*
-    useEffect(() => {
-
-      let isApiSubscribed =true;
-      if(actualizado){
-        dispatch(actuaPresupuesto(presupuesto))
-      }else if(isApiSubscribed){
-        dispatch(pruebaPresupuesto(listActividades, total));
-      }
-      return () => {
-          isApiSubscribed = false;
-      }
-      
-
-    }, [dispatch])
-    
-*/
-
-//  dispatch(pruebaPresupuesto(listActividades, total));
 
   return (
-      <div className='container'>
+      <div className='container col-9 mt-5'>
 
         <h2>{cliente.nombre}</h2>
         <hr/>
@@ -58,6 +26,8 @@ export const VisualizarScreen = () => {
         <PdfScreen 
         key={presupuesto._id}
         {...presupuesto}/>
+
+        
         
       </div>
 

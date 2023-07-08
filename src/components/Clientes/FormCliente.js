@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCliente, addNewCliente } from '../../actions/cliente';
-//import { useForm } from '../../hooks/useForm';
+import {  addNewCliente } from '../../actions/cliente';
+import { Carga } from '../../helpers/Carga';
 
 export const FormCliente = () => {
 
@@ -24,31 +24,18 @@ export const FormCliente = () => {
         });
     }
 
-    /* const [clienteValues, handleInputChange] = useForm({
-        cedula: '',
-        nombre: '',
-        apellido: '',
-        direccion: '',
-        ciudad: ''
-    }); */
-
-    //const {cedula, nombre, apellido, direccion, ciudad} = clienteValues;
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        //dispatch(addNewCliente(clienteValues));
         dispatch(addNewCliente(clienteValues));
-        
-                
+         
     }
+    
 
     
     return (
         
         <form onSubmit={handleSubmit}>
-            <div className='row'>
                 <div>
                     <input
                     type='text'
@@ -109,13 +96,12 @@ export const FormCliente = () => {
                     />
                 </div>
 
-            </div>
-            
-            <div className='row mt-2'>
-                <button type='submit' className='btn btn-primary'>
-                    Guardar
-                </button>
-            </div>
+                <div className="form-group d-grid gap-2 mt-2">
+
+                    <button type='submit' className='btn btn-primary btn-block '>
+                        Guardar
+                    </button>
+                </div>
             
 
         </form>

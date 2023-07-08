@@ -13,3 +13,10 @@ export const getAct = (actividad) =>({
     payload: actividad
 })
 
+export const getCli = (cliente) => ({
+    type: types.modalCliente,
+    payload: cliente
+})
+
+
+
